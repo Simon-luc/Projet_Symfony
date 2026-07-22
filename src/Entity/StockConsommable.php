@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StockConsommableRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StockConsommableRepository::class)]
@@ -25,6 +27,14 @@ class StockConsommable
     #[ORM\Column]
     private ?int $base_critique = null;
 
+    #[ORM\OneToMany(mappedBy: 'stock_consommable', targetEntity: Consomme::class)]
+    private Collection $consommations;
+
+    public function __construct()
+    {
+        $this->consommations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,7 +48,6 @@ class StockConsommable
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -50,7 +59,6 @@ class StockConsommable
     public function setUnite(string $unite): static
     {
         $this->unite = $unite;
-
         return $this;
     }
 
@@ -62,7 +70,6 @@ class StockConsommable
     public function setQuantite(int $quantite): static
     {
         $this->quantite = $quantite;
-
         return $this;
     }
 
@@ -74,6 +81,31 @@ class StockConsommable
     public function setBaseCritique(int $base_critique): static
     {
         $this->base_critique = $base_critique;
+        return $this;
+    }
+
+    public function getConsommations(): Collection
+    {
+        return $this->consommations;
+    }
+
+    public function addConsommation(Consomme $consommation): static
+    {
+        if (!$this->consommations->contains($consommation)) {
+            $this->consommations->add($consommation);
+            $consommation->setStockConsommable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConsommation(Consomme $consommation): static
+    {
+        if ($this->consommations->removeElement($consommation)) {
+            if ($consommation->getStockConsommable() === $this) {
+                $consommation->setStockConsommable(null);
+            }
+        }
 
         return $this;
     }
