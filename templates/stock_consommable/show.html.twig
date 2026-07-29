@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StockConsommable{% endblock %}
+
+{% block body %}
+    <h1>StockConsommable</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stock_consommable.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ stock_consommable.nom }}</td>
+            </tr>
+            <tr>
+                <th>Unite</th>
+                <td>{{ stock_consommable.unite }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ stock_consommable.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Base_critique</th>
+                <td>{{ stock_consommable.baseCritique }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stock_consommable_index') }}">back to list</a>
+
+    <a href="{{ path('app_stock_consommable_edit', {'id': stock_consommable.id}) }}">edit</a>
+
+    {{ include('stock_consommable/_delete_form.html.twig') }}
+{% endblock %}

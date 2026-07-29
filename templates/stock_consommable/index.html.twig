@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StockConsommable index{% endblock %}
+
+{% block body %}
+    <h1>StockConsommable index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Unite</th>
+                <th>Quantite</th>
+                <th>Base_critique</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock_consommable in stock_consommables %}
+            <tr>
+                <td>{{ stock_consommable.id }}</td>
+                <td>{{ stock_consommable.nom }}</td>
+                <td>{{ stock_consommable.unite }}</td>
+                <td>{{ stock_consommable.quantite }}</td>
+                <td>{{ stock_consommable.baseCritique }}</td>
+                <td>
+                    <a href="{{ path('app_stock_consommable_show', {'id': stock_consommable.id}) }}">show</a>
+                    <a href="{{ path('app_stock_consommable_edit', {'id': stock_consommable.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stock_consommable_new') }}">Create new</a>
+{% endblock %}
