@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilise index{% endblock %}
+
+{% block body %}
+    <h1>Utilise index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_de_fin</th>
+                <th>Date_de_debut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilise in utilises %}
+            <tr>
+                <td>{{ utilise.id }}</td>
+                <td>{{ utilise.dateDeFin ? utilise.dateDeFin|date('Y-m-d') : '' }}</td>
+                <td>{{ utilise.dateDeDebut ? utilise.dateDeDebut|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_utilise_show', {'id': utilise.id}) }}">show</a>
+                    <a href="{{ path('app_utilise_edit', {'id': utilise.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_utilise_new') }}">Create new</a>
+{% endblock %}

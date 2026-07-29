@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilise{% endblock %}
+
+{% block body %}
+    <h1>Utilise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ utilise.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_de_fin</th>
+                <td>{{ utilise.dateDeFin ? utilise.dateDeFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_de_debut</th>
+                <td>{{ utilise.dateDeDebut ? utilise.dateDeDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_utilise_index') }}">back to list</a>
+
+    <a href="{{ path('app_utilise_edit', {'id': utilise.id}) }}">edit</a>
+
+    {{ include('utilise/_delete_form.html.twig') }}
+{% endblock %}
