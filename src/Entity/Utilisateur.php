@@ -117,7 +117,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function eraseCredentials() :void
+    public function eraseCredentials(): void
     {
         // Si tu stockes des données sensibles temporaires, nettoie-les ici
     }
@@ -174,5 +174,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->email;
     }
 }

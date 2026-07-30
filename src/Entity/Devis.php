@@ -34,6 +34,11 @@ class Devis
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $utilisateur = null;
 
+    #[ORM\ManyToOne(inversedBy: 'devis')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Client $client = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +114,22 @@ class Devis
         $this->utilisateur = $utilisateur;
 
         return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
+        return $this;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->numero_devis;
     }
 }

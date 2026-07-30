@@ -110,4 +110,9 @@ class Intervention
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->date_intervention->format('d-m-Y');
+    }
 }

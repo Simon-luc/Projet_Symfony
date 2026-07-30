@@ -76,4 +76,9 @@ class Consomme
         $this->stock_consommable = $stock_consommable;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return 'Consommation #' . $this->id;
+    }
 }

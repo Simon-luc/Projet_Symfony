@@ -28,6 +28,10 @@ class Utilise
     #[ORM\JoinColumn(nullable: false)]
     private ?Materiel $materiel = null;
 
+    #[ORM\ManyToOne(inversedBy: 'utilisations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Intervention $intervention = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +82,22 @@ class Utilise
     {
         $this->materiel = $materiel;
 
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return 'Utilisation #' . $this->id;
+    }
+
+    public function getIntervention(): ?Intervention
+    {
+        return $this->intervention;
+    }
+
+    public function setIntervention(?Intervention $intervention): static
+    {
+        $this->intervention = $intervention;
         return $this;
     }
 }
